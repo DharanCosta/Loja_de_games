@@ -33,7 +33,7 @@ public class CategoriaController {
 		if (list.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro, tente novamente.");
 		} else {
-			return ResponseEntity.ok(repository.findAll());
+	 		return ResponseEntity.ok(repository.findAll());
 		}
 	}
 
