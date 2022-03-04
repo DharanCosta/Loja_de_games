@@ -16,46 +16,50 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import com.gamestore.GameStoreG6.model.CategoriaModel;
-import com.gamestore.GameStoreG6.repository.CategoriaRepository;
+import com.gamestore.GameStoreG6.model.ProdutoModel;
+import com.gamestore.GameStoreG6.repository.ProdutoRepository;
 
 @RestController
-@RequestMapping("/categoria")
-@CrossOrigin("*")
-public class CategoriaController {
-
+@RequestMapping("/produto")
+@CrossOrigin ("*")
+public class ProdutoController {
+	
 	@Autowired
-	public CategoriaRepository repository;
-
+	public ProdutoRepository repository;
+	
 	@GetMapping("/all")
-	public ResponseEntity<List<CategoriaModel>> getAll() {
-		List<CategoriaModel> list = repository.findAll();
+	public ResponseEntity <List<ProdutoModel>>getAll(){
+		List<ProdutoModel> list = repository.findAll();
 		if (list.isEmpty()) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Erro, tente novamente.");
 		} else {
-	 		return ResponseEntity.ok(repository.findAll());
-		}
+			return ResponseEntity.ok(repository.findAll());
+		}	
 	}
-
+	
 	@GetMapping("/{id}")
-	public ResponseEntity<CategoriaModel> getById(@PathVariable long id) {
-		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
+	public ResponseEntity<ProdutoModel> getById (@PathVariable long id){
+		return repository.findById(id)
+				.map(resp -> ResponseEntity.ok(resp))
+				.orElse(ResponseEntity.notFound().build());
 	}
-
+	
 	@PostMapping
-	public ResponseEntity<CategoriaModel> post(@RequestBody CategoriaModel categoria) {
-		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
-	}
+	public ResponseEntity<ProdutoModel> post (@RequestBody ProdutoModel produto){
+		return ResponseEntity.status(HttpStatus.CREATED)
+				.body(repository. save (produto));
 
+	}
+	
 	@PutMapping
-	public ResponseEntity<CategoriaModel> put(@RequestBody CategoriaModel categoria) {
-		return ResponseEntity.status(HttpStatus.OK).body(repository.save(categoria));
+	public ResponseEntity<ProdutoModel> put (@RequestBody ProdutoModel produto){
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(repository.save(produto));
 	}
-
+	
 	@DeleteMapping("/{id}")
-	public void delete(@PathVariable long id) {
+	public void delete (@PathVariable long id) {
 		repository.deleteById(id);
-
 	}
-
 }
+	
