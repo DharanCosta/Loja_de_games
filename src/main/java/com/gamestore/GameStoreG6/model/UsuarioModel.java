@@ -21,6 +21,10 @@ public class UsuarioModel {
 	
 	@NotNull
 	@Size (min = 5, max = 100)
+	private String usuario;
+	
+	@NotNull
+	@Size (min = 5, max = 100)
 	private String senha;
 
 	public long getId() {
@@ -46,7 +50,12 @@ public class UsuarioModel {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	
-	
-	
+
+	public String getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(String usuario) {
+		this.usuario = usuario;
+	}
 }
