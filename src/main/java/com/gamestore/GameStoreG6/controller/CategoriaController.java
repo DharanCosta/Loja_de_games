@@ -18,6 +18,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import com.gamestore.GameStoreG6.model.CategoriaModel;
 import com.gamestore.GameStoreG6.repository.CategoriaRepository;
+import com.gamestore.GameStoreG6.repository.GeneroDashboard;
 
 @RestController
 @RequestMapping("/categoria")
@@ -41,7 +42,13 @@ public class CategoriaController {
 	public ResponseEntity<CategoriaModel> getById(@PathVariable long id) {
 		return repository.findById(id).map(resp -> ResponseEntity.ok(resp)).orElse(ResponseEntity.notFound().build());
 	}
-
+	// Testando Dashboard
+	@GetMapping("/GeneroDashboard")
+	public ResponseEntity<List<GeneroDashboard>>getDash(){
+		return ResponseEntity.ok(repository.getDashGenero());
+	}
+	
+	
 	@PostMapping
 	public ResponseEntity<CategoriaModel> post(@RequestBody CategoriaModel categoria) {
 		return ResponseEntity.status(HttpStatus.CREATED).body(repository.save(categoria));
